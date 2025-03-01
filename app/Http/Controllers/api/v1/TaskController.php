@@ -17,7 +17,18 @@ class TaskController extends Controller
     }
 
     /**
-     * Display a listing of the tasks.
+     * @OA\Get(
+     *     path="/api/tasks",
+     *     summary="Get all tasks",
+     *     tags={"Tasks"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of tasks",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="tasks", type="array", @OA\Items(ref="#/components/schemas/Task"))
+     *         )
+     *     )
+     * )
      */
     public function index()
     {
@@ -26,7 +37,27 @@ class TaskController extends Controller
     }
 
     /**
-     * Store a newly created task in storage.
+     * @OA\Post(
+     *     path="/api/tasks",
+     *     summary="Create a new task",
+     *     tags={"Tasks"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string", example="New Task"),
+     *             @OA\Property(property="description", type="string", example="Task details"),
+     *             @OA\Property(property="status", type="string", enum={"pending", "in-progress", "completed"}, example="pending")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Task created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Task created successfully"),
+     *             @OA\Property(property="task", ref="#/components/schemas/Task")
+     *         )
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -41,7 +72,22 @@ class TaskController extends Controller
     }
 
     /**
-     * Display the specified task.
+     * @OA\Get(
+     *     path="/api/tasks/{id}",
+     *     summary="Get a specific task",
+     *     tags={"Tasks"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Task details",
+     *         @OA\JsonContent(ref="#/components/schemas/Task")
+     *     )
+     * )
      */
     public function show(Task $task)
     {
@@ -49,7 +95,33 @@ class TaskController extends Controller
     }
 
     /**
-     * Update the specified task in storage.
+     * @OA\Put(
+     *     path="/api/tasks/{id}",
+     *     summary="Update an existing task",
+     *     tags={"Tasks"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string", example="Updated Task"),
+     *             @OA\Property(property="description", type="string", example="Updated details"),
+     *             @OA\Property(property="status", type="string", enum={"pending", "in-progress", "completed"}, example="completed")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Task updated successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Task updated successfully"),
+     *             @OA\Property(property="task", ref="#/components/schemas/Task")
+     *         )
+     *     )
+     * )
      */
     public function update(Request $request, Task $task)
     {
@@ -64,7 +136,24 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified task from storage.
+     * @OA\Delete(
+     *     path="/api/tasks/{id}",
+     *     summary="Delete a task",
+     *     tags={"Tasks"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Task deleted successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Task deleted successfully")
+     *         )
+     *     )
+     * )
      */
     public function destroy(Task $task)
     {

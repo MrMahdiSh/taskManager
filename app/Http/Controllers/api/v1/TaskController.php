@@ -18,7 +18,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/tasks",
+     *     path="/api/v1/tasks",
      *     summary="Get all tasks",
      *     tags={"Tasks"},
      *     @OA\Response(
@@ -43,7 +43,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/tasks",
+     *     path="/api/v1/tasks",
      *     summary="Create a new task",
      *     tags={"Tasks"},
      *     @OA\RequestBody(
@@ -83,7 +83,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/tasks/{id}",
+     *     path="/api/v1/tasks/{id}",
      *     summary="Get a specific task",
      *     tags={"Tasks"},
      *     @OA\Parameter(
@@ -111,7 +111,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/tasks/{id}",
+     *     path="/api/v1/tasks/{id}",
      *     summary="Update an existing task",
      *     tags={"Tasks"},
      *     @OA\Parameter(
@@ -157,7 +157,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/tasks/{id}",
+     *     path="/api/v1/tasks/{id}",
      *     summary="Delete a task",
      *     tags={"Tasks"},
      *     @OA\Parameter(

@@ -25,7 +25,12 @@ class TaskController extends Controller
      *         response=200,
      *         description="List of tasks",
      *         @OA\JsonContent(
-     *             @OA\Property(property="tasks", type="array", @OA\Items(ref="#/components/schemas/Task"))
+     *             @OA\Property(property="tasks", type="array", @OA\Items(
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="title", type="string", example="Task Title"),
+     *                 @OA\Property(property="description", type="string", example="Task Description"),
+     *                 @OA\Property(property="status", type="string", example="pending")
+     *             ))
      *         )
      *     )
      * )
@@ -54,7 +59,12 @@ class TaskController extends Controller
      *         description="Task created successfully",
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Task created successfully"),
-     *             @OA\Property(property="task", ref="#/components/schemas/Task")
+     *             @OA\Property(property="task", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="title", type="string", example="New Task"),
+     *                 @OA\Property(property="description", type="string", example="Task details"),
+     *                 @OA\Property(property="status", type="string", example="pending")
+     *             )
      *         )
      *     )
      * )
@@ -85,7 +95,12 @@ class TaskController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Task details",
-     *         @OA\JsonContent(ref="#/components/schemas/Task")
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="integer", example=1),
+     *             @OA\Property(property="title", type="string", example="Task Title"),
+     *             @OA\Property(property="description", type="string", example="Task Description"),
+     *             @OA\Property(property="status", type="string", example="pending")
+     *         )
      *     )
      * )
      */
@@ -118,7 +133,12 @@ class TaskController extends Controller
      *         description="Task updated successfully",
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Task updated successfully"),
-     *             @OA\Property(property="task", ref="#/components/schemas/Task")
+     *             @OA\Property(property="task", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="title", type="string", example="Updated Task"),
+     *                 @OA\Property(property="description", type="string", example="Updated details"),
+     *                 @OA\Property(property="status", type="string", example="completed")
+     *             )
      *         )
      *     )
      * )

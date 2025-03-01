@@ -39,7 +39,7 @@ class BaseService
      */
     public function store($data)
     {
-        return $this->model::create([$data]);
+        return $this->model::create($data);
     }
 
     /**

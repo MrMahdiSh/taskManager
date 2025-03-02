@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Services\task\TaskService;
@@ -69,15 +70,9 @@ class TaskController extends Controller
      *     )
      * )
      */
-    public function store(Request $request)
+    public function store(CreateTaskRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'status' => 'required|in:pending,in-progress,completed',
-        ]);
-
-        $task = $this->taskService->store($validated);
+        $task = $this->taskService->store($request);
         return response()->json(['message' => 'Task created successfully', 'task' => $task], 201);
     }
 

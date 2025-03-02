@@ -110,15 +110,10 @@ class TaskController extends Controller
      *     path="/api/v1/tasks/{id}",
      *     summary="Update an existing task",
      *     tags={"Tasks"},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="title", type="string", example="Updated Task"),
      *             @OA\Property(property="description", type="string", example="Updated details"),
      *             @OA\Property(property="status", type="string", enum={"pending", "in-progress", "completed"}, example="completed")

@@ -571,22 +571,16 @@
                 ],
                 "summary": "Update an existing task",
                 "operationId": "412ec616fe99c8f83dd8e582ed2f6e86",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
                                     "title": {
                                         "type": "string",
                                         "example": "Updated Task"

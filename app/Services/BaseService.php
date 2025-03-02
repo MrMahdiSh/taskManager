@@ -52,11 +52,11 @@ class BaseService
     public function update($data)
     {
         // Find the record by ID or throw an exception if not found.
-        $find = $this->model::findOrFail($data->id);
+        $find = $this->model::findOrFail($data["id"]);
 
         if ($find) {
             // Update the record with the provided data.
-            $find::update($data);
+            $find->update($data);
             return $find;
         } else {
             // Throw an exception if the record is not found.

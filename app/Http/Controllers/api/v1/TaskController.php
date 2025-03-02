@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Services\task\TaskService;
@@ -72,7 +73,7 @@ class TaskController extends Controller
      */
     public function store(CreateTaskRequest $request)
     {
-        $task = $this->taskService->store($request);
+        $task = $this->taskService->store($request->validated());
         return response()->json(['message' => 'Task created successfully', 'task' => $task], 201);
     }
 
@@ -138,15 +139,9 @@ class TaskController extends Controller
      *     )
      * )
      */
-    public function update(Request $request, Task $task)
+    public function update(UpdateTaskRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'sometimes|string|max:255',
-            'description' => 'nullable|string',
-            'status' => 'sometimes|in:pending,in-progress,completed',
-        ]);
-
-        $updatedTask = $this->taskService->update((object) array_merge(['id' => $task->id], $validated));
+        $updatedTask = $this->taskService->update($request->validated());
         return response()->json(['message' => 'Task updated successfully', 'task' => $updatedTask], 200);
     }
 

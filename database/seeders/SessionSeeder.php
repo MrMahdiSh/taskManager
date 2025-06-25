@@ -15,7 +15,7 @@ class SessionSeeder extends Seeder
         foreach (DB::table('days')->pluck('id') as $dayId) {
             DB::table('sessions')->insert([
                 'day_id' => $dayId,
-                'type' => 'daily',
+                'type' => 1, // Changed to integer values for type
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -23,14 +23,14 @@ class SessionSeeder extends Seeder
             if ($dayId === DB::table('days')->orderBy('date')->first()->id) {
                 DB::table('sessions')->insert([
                     'day_id' => $dayId,
-                    'type' => 'weekly',
+                    'type' => 2, // Changed to integer values for type
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
 
                 DB::table('sessions')->insert([
                     'day_id' => $dayId,
-                    'type' => 'monthly',
+                    'type' => 3, // Changed to integer values for type
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

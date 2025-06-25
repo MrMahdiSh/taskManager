@@ -10,9 +10,9 @@ class CreateSessionsTable extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('title');
-            $table->text('content');
+            $table->string('type')->default('daily'); // Added default value for type
+            $table->string('title')->default('Untitled Session'); // Added default value for title
+            $table->text('content')->nullable();
             $table->foreignId('day_id')->constrained('days')->onDelete('cascade');
             $table->timestamps();
         });

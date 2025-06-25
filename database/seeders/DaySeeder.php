@@ -24,7 +24,7 @@ class DaySeeder extends Seeder
                     'day_id' => $day,
                     'title' => $faker->sentence,
                     'description' => $faker->paragraph,
-                    'status' => $faker->randomElement(['pending', 'completed']),
+                    'status' => $faker->boolean, // Changed to boolean values
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
@@ -42,7 +42,7 @@ class DaySeeder extends Seeder
 
             DB::table('sessions')->insert([
                 'day_id' => $day,
-                'type' => 'daily',
+                'type' => 1, // Changed to integer values for type
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -50,14 +50,14 @@ class DaySeeder extends Seeder
             if ($offset === 0) {
                 DB::table('sessions')->insert([
                     'day_id' => $day,
-                    'type' => 'weekly',
+                    'type' => 2, // Changed to integer values for type
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
 
                 DB::table('sessions')->insert([
                     'day_id' => $day,
-                    'type' => 'monthly',
+                    'type' => 3, // Changed to integer values for type
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

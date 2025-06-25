@@ -1,0 +1,122 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\DayService;
+use Illuminate\Http\Request;
+
+/**
+ * @OA\Tag(
+ *     name="days",
+ *     description="Operations about days"
+ * )
+ */
+class DayController extends BaseController
+{
+    protected $dayService;
+
+    public function __construct(DayService $dayService)
+    {
+        $this->dayService = $dayService;
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/days",
+     *     tags={"days"},
+     *     summary="Get all days with routines",
+     *     @OA\Response(
+     *         response=200,
+     *         description="A list of days with routines"
+     *     ),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
+    public function index()
+    {
+        return $this->response($this->dayService->getAllWithRoutines());
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/days",
+     *     tags={"days"},
+     *     summary="Store a new day",
+     *     @OA\RequestBody(
+     *         required=true
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Day created successfully"
+     *     ),
+     *     @OA\Response(response=400, description="Bad Request"),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
+    public function store(Request $request)
+    {
+        return $this->response($this->dayService->store($request->all()));
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/days/{col}/{val}",
+     *     tags={"days"},
+     *     summary="Get a specific day by column and value",
+     *     @OA\Parameter(name="col", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Parameter(name="val", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(
+     *         response=200,
+     *         description="A specific day"
+     *     ),
+     *     @OA\Response(response=404, description="Not Found"),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
+    public function show($col, $val)
+    {
+        return $this->response($this->dayService->findColumn($col, $val));
+    }
+
+    /**
+     * @OA\Put(
+     *     path="/api/v1/days/{id}",
+     *     tags={"days"},
+     *     summary="Update an existing day",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\RequestBody(
+     *         required=true
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Day updated successfully"
+     *     ),
+     *     @OA\Response(response=400, description="Bad Request"),
+     *     @OA\Response(response=404, description="Not Found"),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
+    public function update(Request $request, $id)
+    {
+        return $this->response($this->dayService->update($id, $request->all()));
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/api/v1/days/{id}",
+     *     tags={"days"},
+     *     summary="Delete a day",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Day deleted successfully"
+     *     ),
+     *     @OA\Response(response=404, description="Not Found"),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
+    public function destroy($id)
+    {
+        return $this->response($this->dayService->destroy($id));
+    }
+}

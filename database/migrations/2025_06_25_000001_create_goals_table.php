@@ -10,11 +10,11 @@ class CreateGoalsTable extends Migration
     {
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->default('Untitled Goal'); // Added default value for title
             $table->text('description')->nullable();
-            $table->string('status');
+            $table->string('status')->default('planned'); // Added default value for status
             $table->date('deadline')->nullable();
-            $table->integer('priority')->nullable();
+            $table->integer('priority')->default(1); // Added default value for priority
             $table->timestamps();
         });
     }

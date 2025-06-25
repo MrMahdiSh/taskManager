@@ -18,7 +18,7 @@ class GoalSeeder extends Seeder
                 'description' => $faker->paragraph,
                 'status' => $faker->randomElement(['planned', 'active', 'done']),
                 'deadline' => $faker->dateTimeBetween('now', '+1 year'),
-                'priority' => $faker->randomElement(['low', 'medium', 'high']),
+                'priority' => $faker->randomElement([1, 2, 3]), // Changed to integer values
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

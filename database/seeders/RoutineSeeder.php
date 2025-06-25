@@ -18,6 +18,7 @@ class RoutineSeeder extends Seeder
                     'day_id' => $dayId,
                     'title' => $faker->sentence,
                     'description' => $faker->paragraph,
+                    'status' => $faker->boolean, // Added status field with boolean values
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

@@ -18,7 +18,7 @@ class TaskSeeder extends Seeder
                     'day_id' => $dayId,
                     'title' => $faker->sentence,
                     'description' => $faker->paragraph,
-                    'status' => $faker->randomElement(['pending', 'completed']),
+                    'status' => $faker->boolean, // Changed to boolean values
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

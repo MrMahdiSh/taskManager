@@ -4,6 +4,10 @@ use App\Http\Controllers\api\v1\TaskController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SampleWorkController;
 use App\Http\Controllers\AuthVSauth;
+use App\Http\Controllers\GoalController;
+use App\Http\Controllers\DayController;
+use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use WpOrg\Requests\Auth;
@@ -46,5 +50,12 @@ Route::prefix('v1')->group(function () {
     Route::put("/tasks/{id}", [TaskController::class, "update"]);
 
     Route::delete("/tasks/{id}", [TaskController::class, "destroy"]);
-    
+
+    Route::apiResource('goals', GoalController::class);
+
+    Route::apiResource('days', DayController::class);
+
+    Route::apiResource('routines', RoutineController::class);
+
+    Route::apiResource('sessions', SessionController::class);
 });

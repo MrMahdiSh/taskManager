@@ -395,6 +395,583 @@
                 }
             }
         },
+        "/api/v1/days": {
+            "get": {
+                "tags": [
+                    "days"
+                ],
+                "summary": "Get all days with routines",
+                "operationId": "8f4ac099c7a75bf9f23bbcc1c0645d25",
+                "responses": {
+                    "200": {
+                        "description": "A list of days with routines"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "days"
+                ],
+                "summary": "Store a new day",
+                "operationId": "1f2177b4ca1fe7d65135bcda7ed74d89",
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Day created successfully"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/days/{col}/{val}": {
+            "get": {
+                "tags": [
+                    "days"
+                ],
+                "summary": "Get a specific day by column and value",
+                "operationId": "61076016e06ea78501a7067931ccff35",
+                "parameters": [
+                    {
+                        "name": "col",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "val",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A specific day"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/days/{id}": {
+            "put": {
+                "tags": [
+                    "days"
+                ],
+                "summary": "Update an existing day",
+                "operationId": "3369b716dba2716b6eb5207d992e78c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Day updated successfully"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "days"
+                ],
+                "summary": "Delete a day",
+                "operationId": "7feeaf84f4a57a3ab22acfb8f522ab4b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Day deleted successfully"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/goals": {
+            "get": {
+                "tags": [
+                    "Goals"
+                ],
+                "summary": "Get all goals",
+                "operationId": "d9cb79f325f8eae93bddc30c289e2f76",
+                "responses": {
+                    "200": {
+                        "description": "List of goals"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Goals"
+                ],
+                "summary": "Create a new goal",
+                "operationId": "6127de0f82207012c84fda169fc40ff2",
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Goal created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/v1/goals/{id}": {
+            "get": {
+                "tags": [
+                    "Goals"
+                ],
+                "summary": "Get a specific goal",
+                "operationId": "be77e120089c0eca42cfec5bde43dc91",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Goal details"
+                    },
+                    "404": {
+                        "description": "Goal not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Goals"
+                ],
+                "summary": "Update a goal",
+                "operationId": "aa1ece6b002c55429ef6015761ba5f9f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Goal updated successfully"
+                    },
+                    "404": {
+                        "description": "Goal not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Goals"
+                ],
+                "summary": "Delete a goal",
+                "operationId": "b816e7dc3db48e5c322c432078425c3f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Goal deleted successfully"
+                    },
+                    "404": {
+                        "description": "Goal not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/routines": {
+            "get": {
+                "tags": [
+                    "routines"
+                ],
+                "summary": "Get list of routines",
+                "description": "Returns list of routines",
+                "operationId": "6f4b99b6a840eac418ea0f6f4614f133",
+                "responses": {
+                    "200": {
+                        "description": "A list of routines"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "routines"
+                ],
+                "summary": "Create a new routine",
+                "description": "Stores a new routine",
+                "operationId": "443061fe2238d4ba22520868adb2e505",
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Routine created successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/v1/routines/{col}/{val}": {
+            "get": {
+                "tags": [
+                    "routines"
+                ],
+                "summary": "Get a routine by column and value",
+                "description": "Returns a single routine based on the column and value",
+                "operationId": "f5571eb1666a88b0a4f32ff6b55ddda8",
+                "parameters": [
+                    {
+                        "name": "col",
+                        "in": "path",
+                        "description": "The column to search by",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "val",
+                        "in": "path",
+                        "description": "The value of the column to search for",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single routine object"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/routines/{id}": {
+            "put": {
+                "tags": [
+                    "routines"
+                ],
+                "summary": "Update an existing routine",
+                "description": "Updates a routine by ID",
+                "operationId": "031346e7cbfbaecef010e74b406a6398",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the routine to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Routine updated successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "routines"
+                ],
+                "summary": "Delete a routine",
+                "description": "Deletes a routine by ID",
+                "operationId": "1abcee3f6137df1e8c9282abefe8d5e5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the routine to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Routine deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/sessions": {
+            "get": {
+                "tags": [
+                    "sessions"
+                ],
+                "summary": "Get list of sessions",
+                "description": "Returns list of sessions",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "sessions"
+                ],
+                "summary": "Create new session",
+                "description": "Stores a new session",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Session created"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/v1/sessions/{col}/{val}": {
+            "get": {
+                "tags": [
+                    "sessions"
+                ],
+                "summary": "Find session by column and value",
+                "description": "Returns a single session",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "col",
+                        "in": "path",
+                        "description": "Column name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "val",
+                        "in": "path",
+                        "description": "Column value",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/sessions/{id}": {
+            "put": {
+                "tags": [
+                    "sessions"
+                ],
+                "summary": "Update an existing session",
+                "description": "Updates a session by ID",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Session ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Session updated"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "sessions"
+                ],
+                "summary": "Delete a session",
+                "description": "Deletes a session by ID",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Session ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Session deleted"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1/tasks": {
             "get": {
                 "tags": [
@@ -683,8 +1260,24 @@
     },
     "tags": [
         {
+            "name": "days",
+            "description": "Operations about days"
+        },
+        {
+            "name": "routines",
+            "description": "API Endpoints of Routine"
+        },
+        {
+            "name": "sessions",
+            "description": "API Endpoints of Sessions"
+        },
+        {
             "name": "Authentication",
             "description": "Authentication"
+        },
+        {
+            "name": "Goals",
+            "description": "Goals"
         },
         {
             "name": "Tasks",

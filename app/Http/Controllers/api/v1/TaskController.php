@@ -6,9 +6,11 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Models\Day;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Services\task\TaskService;
+use Mockery\Undefined;
 
 class TaskController extends BaseController
 {
@@ -54,6 +56,7 @@ class TaskController extends BaseController
      *         @OA\JsonContent(
      *             @OA\Property(property="title", type="string", example="New Task"),
      *             @OA\Property(property="description", type="string", example="Task details"),
+     *             @OA\Property(property="date", type="date"),
      *             @OA\Property(property="status", type="string", enum={"pending", "in-progress", "completed"}, example="pending")
      *         )
      *     ),
@@ -74,7 +77,23 @@ class TaskController extends BaseController
      */
     public function store(CreateTaskRequest $request)
     {
-        $task = $this->taskService->store($request->validated());
+        // $task = $this->taskService->store($request->validated());
+
+        // find the day
+        $day = Day::where("date", $request->input("date"))->first();
+
+        if (!$day) {
+            return response()->json(['message' => 'Day not found!'], 404);
+        }
+
+        $data = $request->validated();
+
+        $data["day_id"] = $day->id;
+
+        $data["date"] = null;
+
+        $task = $this->taskService->store($data);
+
         return response()->json(['message' => 'Task created successfully', 'task' => $task], 201);
     }
 

@@ -12,7 +12,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->boolean('status');
+            $table->string('status')->default("planned");
             $table->time('time')->nullable();
             $table->foreignId('day_id')->constrained('days')->onDelete('cascade');
             $table->timestamps();

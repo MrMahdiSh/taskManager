@@ -1342,6 +1342,10 @@
                                         "type": "string",
                                         "example": "Task details"
                                     },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
                                     "status": {
                                         "type": "string",
                                         "enum": [

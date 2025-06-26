@@ -55,6 +55,8 @@ Route::prefix('v1')->group(function () {
 
     Route::apiResource('days', DayController::class);
 
+    Route::post('days/selectByDate', [DayController::class, "selectByDate"]);
+
     Route::apiResource('routines', RoutineController::class);
 
     Route::apiResource('sessions', SessionController::class);

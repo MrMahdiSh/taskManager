@@ -525,6 +525,46 @@
                 }
             }
         },
+        "/api/v1/days/selectByDate": {
+            "post": {
+                "tags": [
+                    "days"
+                ],
+                "summary": "Find a day by date",
+                "operationId": "5b77541ea2a31ca53e58be88ac042fd6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "date"
+                                ],
+                                "properties": {
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-06-26"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Day found successfully"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/api/v1/goals": {
             "get": {
                 "tags": [

@@ -16,4 +16,19 @@ class DayService extends BaseService
     {
         return $this->model::with('routines')->get();
     }
+
+    public function findByDate($date)
+    {
+        $day = $this->model::where('date', $date)->first();
+
+        if (!$day) {
+            // we have to create this day!
+            Day::create([
+                "date" => now()->toDateString()
+            ]);
+            // set the routines
+            
+        }
+        return $day;
+    }
 }

@@ -79,6 +79,38 @@ class DayController extends BaseController
     }
 
     /**
+     * @OA\Post(
+     *     path="/api/v1/days/selectByDate",
+     *     tags={"days"},
+     *     summary="Find a day by date",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"date"},
+     *             @OA\Property(property="date", type="string", format="date", example="2025-06-26")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Day found successfully"
+     *     ),
+     *     @OA\Response(response=404, description="Not Found"),
+     *     @OA\Response(response=500, description="Internal Server Error")
+     * )
+     */
+    public function selectByDate(Request $request)
+    {
+        $date = $request->input('date');
+        $day = $this->dayService->findByDate($date);
+
+        if (!$day) {
+            return response()->json(['message' => 'Day not found'], 404);
+        }
+
+        return $this->response($day);
+    }
+
+    /**
      * @OA\Put(
      *     path="/api/v1/days/{id}",
      *     tags={"days"},

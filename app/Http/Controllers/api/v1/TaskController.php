@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
@@ -9,7 +10,7 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Services\task\TaskService;
 
-class TaskController extends Controller
+class TaskController extends BaseController
 {
     protected $taskService;
 

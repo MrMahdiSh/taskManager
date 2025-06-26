@@ -6,10 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Routine extends Model
 {
-    protected $fillable = ['title', 'description', 'status', 'day_id'];
-
-    public function day()
-    {
-        return $this->belongsTo(Day::class);
-    }
+    protected $fillable = ['title', 'description'];
 }

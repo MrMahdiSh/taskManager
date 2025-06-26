@@ -788,7 +788,27 @@
                 "description": "Stores a new routine",
                 "operationId": "443061fe2238d4ba22520868adb2e505",
                 "requestBody": {
-                    "required": true
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "201": {
@@ -898,6 +918,178 @@
                     },
                     "404": {
                         "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/routineTasks": {
+            "get": {
+                "tags": [
+                    "RoutineTasks"
+                ],
+                "summary": "Get all routine tasks",
+                "operationId": "25558932f162b4d982d70e6122435f3d",
+                "responses": {
+                    "200": {
+                        "description": "List of routine tasks",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Routine Task Title"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Routine Task Description"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/routineTasks/{id}": {
+            "get": {
+                "tags": [
+                    "RoutineTasks"
+                ],
+                "summary": "Get a specific routine task",
+                "operationId": "806429392b9108126eefe85801a5ee22",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Routine task details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Routine Task Title"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Routine Task Description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "RoutineTasks"
+                ],
+                "summary": "Update a routine task",
+                "operationId": "eb0977243cfbb0b59d70ff80cad776e5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Updated Routine Task Title"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Updated Routine Task Description"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Routine task updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Updated Routine Task Title"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Updated Routine Task Description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "RoutineTasks"
+                ],
+                "summary": "Delete a routine task",
+                "operationId": "ed0be6af3a08f724ca37257f93e0f86e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Routine task deleted successfully"
                     }
                 }
             }
@@ -1371,6 +1563,10 @@
         {
             "name": "Goals",
             "description": "Goals"
+        },
+        {
+            "name": "RoutineTasks",
+            "description": "RoutineTasks"
         },
         {
             "name": "Tasks",

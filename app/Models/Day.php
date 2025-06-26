@@ -13,13 +13,13 @@ class Day extends Model
         return $this->hasMany(Task::class);
     }
 
-    public function routines()
-    {
-        return $this->hasMany(Routine::class);
-    }
-
     public function sessions()
     {
         return $this->hasMany(Session::class);
+    }
+
+    public function routineTasks()
+    {
+        return $this->hasMany(RoutineTask::class);
     }
 }

@@ -2,15 +2,12 @@
 
 use App\Http\Controllers\api\v1\TaskController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\SampleWorkController;
-use App\Http\Controllers\AuthVSauth;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\DayController;
 use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\RoutineTaskController;
 use App\Http\Controllers\SessionController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use WpOrg\Requests\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +55,8 @@ Route::prefix('v1')->group(function () {
     Route::post('days/selectByDate', [DayController::class, "selectByDate"]);
 
     Route::apiResource('routines', RoutineController::class);
+
+    Route::apiResource('routineTasks', RoutineTaskController::class);
 
     Route::apiResource('sessions', SessionController::class);
 });

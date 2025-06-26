@@ -12,8 +12,6 @@ class CreateRoutinesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->boolean('status')->default(false); // Added default value for status
-            $table->foreignId('day_id')->constrained('days')->onDelete('cascade');
             $table->timestamps();
         });
     }

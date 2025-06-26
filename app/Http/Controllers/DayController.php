@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Day;
+use App\Models\Routine;
+use App\Models\RoutineTask;
 use App\Services\DayService;
 use Illuminate\Http\Request;
 
@@ -35,7 +37,7 @@ class DayController extends BaseController
      */
     public function index()
     {
-        return $this->response($this->dayService->getAllWithRoutines());
+        return $this->response($this->dayService->index());
     }
 
     /**
@@ -75,7 +77,7 @@ class DayController extends BaseController
      */
     public function show($id)
     {
-        return $this->response(Day::find($id));
+        return $this->response(Day::find($id)->with("routineTasks", "tasks", "sessions"));
     }
 
     /**
@@ -104,7 +106,25 @@ class DayController extends BaseController
         $day = $this->dayService->findByDate($date);
 
         if (!$day) {
-            return response()->json(['message' => 'Day not found'], 404);
+            // create the day
+            $createdDay = Day::create([
+                "date" => $date
+            ]);
+
+            // fetch routines
+            $routines = Routine::all();
+
+            // create routine tasks
+            foreach ($routines as $routine) {
+                RoutineTask::create([
+                    "day_id" => $createdDay->id,
+                    "routine_id" => $routine->id,
+                    "status" => "planned"
+                ]);
+            }
+
+            // reload day with relationships
+            $day = $this->dayService->findByDate($date);
         }
 
         return $this->response($day);

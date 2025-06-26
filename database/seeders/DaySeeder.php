@@ -30,16 +30,6 @@ class DaySeeder extends Seeder
                 ]);
             }
 
-            foreach (range(1, rand(1, 2)) as $routineIndex) {
-                DB::table('routines')->insert([
-                    'day_id' => $day,
-                    'title' => $faker->sentence,
-                    'description' => $faker->paragraph,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-
             DB::table('sessions')->insert([
                 'day_id' => $day,
                 'type' => 1, // Changed to integer values for type
@@ -62,6 +52,15 @@ class DaySeeder extends Seeder
                     'updated_at' => now(),
                 ]);
             }
+        }
+
+        foreach (range(1, rand(1, 2)) as $routineIndex) {
+            DB::table('routines')->insert([
+                'title' => $faker->sentence,
+                'description' => $faker->paragraph,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
     }
 }

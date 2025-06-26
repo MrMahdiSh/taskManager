@@ -46,9 +46,14 @@ class RoutineController extends BaseController
      *     tags={"routines"},
      *     summary="Create a new routine",
      *     description="Stores a new routine",
-     *     @OA\RequestBody(
-     *         required=true
-     *     ),
+     *@OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"title"},
+     *             @OA\Property(property="title", type="string", maxLength=255),
+     *             @OA\Property(property="description", type="string", maxLength=255),
+     *         )
+     *),
      *     @OA\Response(
      *         response=201,
      *         description="Routine created successfully"

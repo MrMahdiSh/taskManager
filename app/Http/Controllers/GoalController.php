@@ -37,7 +37,15 @@ class GoalController extends BaseController
      *     summary="Create a new goal",
      *     tags={"Goals"},
      *     @OA\RequestBody(
-     *         required=true
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"title","status","priority"},
+     *             @OA\Property(property="title", type="string", maxLength=255),
+     *             @OA\Property(property="description", type="string", nullable=true),
+     *             @OA\Property(property="status", type="string", enum={"planned","active","done"}),
+     *             @OA\Property(property="deadline", type="string", format="date", nullable=true),
+     *             @OA\Property(property="priority", type="integer", minimum=1, maximum=3)
+     *         )
      *     ),
      *     @OA\Response(
      *         response=201,
@@ -49,9 +57,18 @@ class GoalController extends BaseController
      *     )
      * )
      */
+
     public function store(Request $request)
     {
-        return $this->response($this->goalService->store($request->all()));
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'required|string|in:planned,active,done',
+            'deadline' => 'nullable|date',
+            'priority' => 'required|integer|min:1|max:3',
+        ]);
+
+        return $this->response($this->goalService->store($validatedData));
     }
 
     /**
@@ -84,6 +101,17 @@ class GoalController extends BaseController
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
+     *@OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"title","status","priority"},
+     *             @OA\Property(property="title", type="string", maxLength=255),
+     *             @OA\Property(property="description", type="string", nullable=true),
+     *             @OA\Property(property="status", type="string", enum={"planned","active","done"}),
+     *             @OA\Property(property="deadline", type="string", format="date", nullable=true),
+     *             @OA\Property(property="priority", type="integer", minimum=1, maximum=3)
+     *         )
+     *),
      *     @OA\RequestBody(
      *         required=true
      *     ),
@@ -99,7 +127,19 @@ class GoalController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        return $this->response($this->goalService->update($id, $request->all()));
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'required|string|in:planned,active,done',
+            'deadline' => 'nullable|date',
+            'priority' => 'required|integer|min:1|max:3',
+        ]);
+
+        if (!is_array($validatedData)) {
+            return $this->response(['error' => 'Invalid data format'], 422);
+        }
+
+        return $this->response($this->goalService->update($id, $validatedData));
     }
 
     /**

@@ -545,7 +545,47 @@
                 "summary": "Create a new goal",
                 "operationId": "6127de0f82207012c84fda169fc40ff2",
                 "requestBody": {
-                    "required": true
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "status",
+                                    "priority"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "planned",
+                                            "active",
+                                            "done"
+                                        ]
+                                    },
+                                    "deadline": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "nullable": true
+                                    },
+                                    "priority": {
+                                        "type": "integer",
+                                        "maximum": 3,
+                                        "minimum": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "201": {
@@ -570,16 +610,19 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Goal details"
+                        "description": "A specific goal"
                     },
                     "404": {
-                        "description": "Goal not found"
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             },
@@ -600,7 +643,47 @@
                     }
                 ],
                 "requestBody": {
-                    "required": true
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "status",
+                                    "priority"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "planned",
+                                            "active",
+                                            "done"
+                                        ]
+                                    },
+                                    "deadline": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "nullable": true
+                                    },
+                                    "priority": {
+                                        "type": "integer",
+                                        "maximum": 3,
+                                        "minimum": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "200": {
@@ -680,28 +763,17 @@
                 }
             }
         },
-        "/api/v1/routines/{col}/{val}": {
+        "/api/v1/routines/{id}": {
             "get": {
                 "tags": [
                     "routines"
                 ],
-                "summary": "Get a routine by column and value",
-                "description": "Returns a single routine based on the column and value",
-                "operationId": "f5571eb1666a88b0a4f32ff6b55ddda8",
+                "summary": "Get a specific routine",
+                "operationId": "6034fa6a7742fc0c9535ce7378d27ebe",
                 "parameters": [
                     {
-                        "name": "col",
+                        "name": "id",
                         "in": "path",
-                        "description": "The column to search by",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "val",
-                        "in": "path",
-                        "description": "The value of the column to search for",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -710,21 +782,16 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "A single routine object"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
+                        "description": "A specific routine"
                     },
                     "404": {
                         "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
-            }
-        },
-        "/api/v1/routines/{id}": {
+            },
             "put": {
                 "tags": [
                     "routines"
@@ -844,28 +911,17 @@
                 }
             }
         },
-        "/api/v1/sessions/{col}/{val}": {
+        "/api/v1/sessions/{id}": {
             "get": {
                 "tags": [
                     "sessions"
                 ],
-                "summary": "Find session by column and value",
-                "description": "Returns a single session",
-                "operationId": "show",
+                "summary": "Get a specific session",
+                "operationId": "e5f09c877901009fb107d66b882bb42a",
                 "parameters": [
                     {
-                        "name": "col",
+                        "name": "id",
                         "in": "path",
-                        "description": "Column name",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "val",
-                        "in": "path",
-                        "description": "Column value",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -874,21 +930,16 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
+                        "description": "A specific session"
                     },
                     "404": {
                         "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
-            }
-        },
-        "/api/v1/sessions/{id}": {
+            },
             "put": {
                 "tags": [
                     "sessions"
@@ -1097,38 +1148,19 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Task details",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "example": 1
-                                        },
-                                        "title": {
-                                            "type": "string",
-                                            "example": "Task Title"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "example": "Task Description"
-                                        },
-                                        "status": {
-                                            "type": "string",
-                                            "example": "pending"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "A specific task"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             },

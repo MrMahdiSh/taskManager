@@ -49,10 +49,10 @@ class BaseService
      * @return Model Returns the updated model instance.
      * @throws Exception If the target record is not found.
      */
-    public function update($data)
+    public function update($id, $data)
     {
         // Find the record by ID or throw an exception if not found.
-        $find = $this->model::findOrFail($data["id"]);
+        $find = $this->model::findOrFail($id);
 
         if ($find) {
             // Update the record with the provided data.

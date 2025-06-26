@@ -1148,9 +1148,9 @@
                                         "description": "Content of the session",
                                         "type": "string"
                                     },
-                                    "day_id": {
-                                        "description": "Day ID associated with the session",
-                                        "type": "integer"
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
                                     }
                                 },
                                 "type": "object"

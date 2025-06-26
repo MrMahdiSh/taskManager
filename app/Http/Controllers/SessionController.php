@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Day;
 use App\Services\SessionService;
 use App\Models\Session;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class SessionController extends BaseController
      *             @OA\Property(property="type", type="string", description="Type of the session"),
      *             @OA\Property(property="title", type="string", description="Title of the session"),
      *             @OA\Property(property="content", type="string", description="Content of the session"),
-     *             @OA\Property(property="day_id", type="integer", description="Day ID associated with the session")
+     *             @OA\Property(property="date", type="date")
      *         )
      *     ),
      *     @OA\Response(
@@ -93,12 +94,20 @@ class SessionController extends BaseController
             'type' => 'required|string|in:daily,weekly,monthly',
             'title' => 'required|string',
             'content' => 'required|string',
-            'day_id' => 'integer',
+            'date' => 'required|date',
         ]);
 
-        if ($validatedData["type"] == "daily" && !isset($validatedData["day_id"])) {
-            return $this->response([], "The day_id should comes.", 500);
+        if ($validatedData["type"] == "daily" && !isset($validatedData["date"])) {
+            return $this->response([], "The date should comes.", 500);
         }
+
+        // find the day
+        $day = Day::where("date", $validatedData["date"])->first();
+
+        $validatedData["day_id"] = $day->id;
+
+        $validatedData["date"] = null;
+
         return $this->response($this->sessionService->store($validatedData));
     }
 

@@ -80,29 +80,20 @@ class TaskController extends Controller
     /**
      * @OA\Get(
      *     path="/api/v1/tasks/{id}",
-     *     summary="Get a specific task",
      *     tags={"Tasks"},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
+     *     summary="Get a specific task",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Response(
      *         response=200,
-     *         description="Task details",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="id", type="integer", example=1),
-     *             @OA\Property(property="title", type="string", example="Task Title"),
-     *             @OA\Property(property="description", type="string", example="Task Description"),
-     *             @OA\Property(property="status", type="string", example="pending")
-     *         )
-     *     )
+     *         description="A specific task"
+     *     ),
+     *     @OA\Response(response=404, description="Not Found"),
+     *     @OA\Response(response=500, description="Internal Server Error")
      * )
      */
-    public function show(Task $task)
+    public function show($id)
     {
-        return response()->json(['task' => $task], 200);
+        return $this->response(Task::find($id));
     }
 
     /**

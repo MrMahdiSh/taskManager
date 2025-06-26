@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\GoalService;
+use App\Models\Goal;
 use Illuminate\Http\Request;
 
 class GoalController extends BaseController
@@ -56,27 +57,20 @@ class GoalController extends BaseController
     /**
      * @OA\Get(
      *     path="/api/v1/goals/{id}",
-     *     summary="Get a specific goal",
      *     tags={"Goals"},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
+     *     summary="Get a specific goal",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Response(
      *         response=200,
-     *         description="Goal details"
+     *         description="A specific goal"
      *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Goal not found"
-     *     )
+     *     @OA\Response(response=404, description="Not Found"),
+     *     @OA\Response(response=500, description="Internal Server Error")
      * )
      */
-    public function show($col, $val)
+    public function show($id)
     {
-        return $this->response($this->goalService->findColumn($col, $val));
+        return $this->response(Goal::find($id));
     }
 
     /**

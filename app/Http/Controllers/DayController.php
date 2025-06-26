@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Day;
 use App\Services\DayService;
 use Illuminate\Http\Request;
 
@@ -60,11 +61,10 @@ class DayController extends BaseController
 
     /**
      * @OA\Get(
-     *     path="/api/v1/days/{col}/{val}",
+     *     path="/api/v1/days/{id}",
      *     tags={"days"},
      *     summary="Get a specific day by column and value",
-     *     @OA\Parameter(name="col", in="path", required=true, @OA\Schema(type="string")),
-     *     @OA\Parameter(name="val", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Response(
      *         response=200,
      *         description="A specific day"
@@ -73,9 +73,9 @@ class DayController extends BaseController
      *     @OA\Response(response=500, description="Internal Server Error")
      * )
      */
-    public function show($col, $val)
+    public function show($id)
     {
-        return $this->response($this->dayService->findColumn($col, $val));
+        return $this->response(Day::find($id));
     }
 
     /**

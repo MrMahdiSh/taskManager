@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\SessionService;
+use App\Models\Session;
 use Illuminate\Http\Request;
 
 /**
@@ -85,46 +86,21 @@ class SessionController extends BaseController
 
     /**
      * @OA\Get(
-     *     path="/api/v1/sessions/{col}/{val}",
+     *     path="/api/v1/sessions/{id}",
      *     tags={"sessions"},
-     *     summary="Find session by column and value",
-     *     description="Returns a single session",
-     *     operationId="show",
-     *     @OA\Parameter(
-     *         name="col",
-     *         in="path",
-     *         required=true,
-     *         description="Column name",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="val",
-     *         in="path",
-     *         required=true,
-     *         description="Column value",
-     *         @OA\Schema(type="string")
-     *     ),
+     *     summary="Get a specific session",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Response(
      *         response=200,
-     *         description="Successful operation"
+     *         description="A specific session"
      *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthorized"
-     *     ),
-     *     @OA\Response(
-     *         response=403,
-     *         description="Forbidden"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Not Found"
-     *     )
+     *     @OA\Response(response=404, description="Not Found"),
+     *     @OA\Response(response=500, description="Internal Server Error")
      * )
      */
-    public function show($col, $val)
+    public function show($id)
     {
-        return $this->response($this->sessionService->findColumn($col, $val));
+        return $this->response(Session::find($id));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\RoutineService;
+use App\Models\Routine;
 use Illuminate\Http\Request;
 
 /**
@@ -63,36 +64,21 @@ class RoutineController extends BaseController
 
     /**
      * @OA\Get(
-     *     path="/api/v1/routines/{col}/{val}",
+     *     path="/api/v1/routines/{id}",
      *     tags={"routines"},
-     *     summary="Get a routine by column and value",
-     *     description="Returns a single routine based on the column and value",
-     *     @OA\Parameter(
-     *         name="col",
-     *         in="path",
-     *         required=true,
-     *         description="The column to search by",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="val",
-     *         in="path",
-     *         required=true,
-     *         description="The value of the column to search for",
-     *         @OA\Schema(type="string")
-     *     ),
+     *     summary="Get a specific routine",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Response(
      *         response=200,
-     *         description="A single routine object"
+     *         description="A specific routine"
      *     ),
-     *     @OA\Response(response=401, description="Unauthorized"),
-     *     @OA\Response(response=403, description="Forbidden"),
-     *     @OA\Response(response=404, description="Not Found")
+     *     @OA\Response(response=404, description="Not Found"),
+     *     @OA\Response(response=500, description="Internal Server Error")
      * )
      */
-    public function show($col, $val)
+    public function show($id)
     {
-        return $this->response($this->routineService->findColumn($col, $val));
+        return $this->response(Routine::find($id));
     }
 
     /**

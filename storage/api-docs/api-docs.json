@@ -433,24 +433,16 @@
                 }
             }
         },
-        "/api/v1/days/{col}/{val}": {
+        "/api/v1/days/{id}": {
             "get": {
                 "tags": [
                     "days"
                 ],
                 "summary": "Get a specific day by column and value",
-                "operationId": "61076016e06ea78501a7067931ccff35",
+                "operationId": "4a3866e3c3ef7494432a7066c00ed9cf",
                 "parameters": [
                     {
-                        "name": "col",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "val",
+                        "name": "id",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -469,9 +461,7 @@
                         "description": "Internal Server Error"
                     }
                 }
-            }
-        },
-        "/api/v1/days/{id}": {
+            },
             "put": {
                 "tags": [
                     "days"

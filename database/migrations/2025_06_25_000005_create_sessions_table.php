@@ -13,7 +13,7 @@ class CreateSessionsTable extends Migration
             $table->string('type')->default('daily'); // Added default value for type
             $table->string('title')->default('Untitled Session'); // Added default value for title
             $table->text('content')->nullable();
-            $table->foreignId('day_id')->constrained('days')->onDelete('cascade');
+            $table->foreignId('day_id')->nullable()->constrained('days')->onDelete('cascade');
             $table->timestamps();
         });
     }

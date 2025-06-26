@@ -59,7 +59,15 @@ class SessionController extends BaseController
      *     description="Stores a new session",
      *     operationId="store",
      *     @OA\RequestBody(
-     *         required=true
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             required={"type", "title", "content", "day_id"},
+     *             @OA\Property(property="type", type="string", description="Type of the session"),
+     *             @OA\Property(property="title", type="string", description="Title of the session"),
+     *             @OA\Property(property="content", type="string", description="Content of the session"),
+     *             @OA\Property(property="day_id", type="integer", description="Day ID associated with the session")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=201,
@@ -81,7 +89,17 @@ class SessionController extends BaseController
      */
     public function store(Request $request)
     {
-        return $this->response($this->sessionService->store($request->all()));
+        $validatedData = $request->validate([
+            'type' => 'required|string|in:daily,weekly,monthly',
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'day_id' => 'integer',
+        ]);
+
+        if ($validatedData["type"] == "daily" && !isset($validatedData["day_id"])) {
+            return $this->response([], "The day_id should comes.", 500);
+        }
+        return $this->response($this->sessionService->store($validatedData));
     }
 
     /**

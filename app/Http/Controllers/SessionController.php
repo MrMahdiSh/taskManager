@@ -93,6 +93,7 @@ class SessionController extends BaseController
         $validatedData = $request->validate([
             'type' => 'required|string|in:daily,weekly,monthly',
             'title' => 'required|string',
+            'date' => 'nullable|string',
             'content' => 'required|string'
         ]);
 

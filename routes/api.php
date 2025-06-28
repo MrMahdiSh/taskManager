@@ -48,6 +48,8 @@ Route::prefix('v1')->group(function () {
 
     Route::delete("/tasks/{id}", [TaskController::class, "destroy"]);
 
+    Route::get('/theTasks/important', [TaskController::class, 'getImportantTasks']);
+
     Route::apiResource('goals', GoalController::class);
 
     Route::apiResource('days', DayController::class);

@@ -57,6 +57,7 @@ class TaskController extends BaseController
      *             @OA\Property(property="title", type="string", example="New Task"),
      *             @OA\Property(property="description", type="string", example="Task details"),
      *             @OA\Property(property="date", type="date"),
+     *             @OA\Property(property="priority", type="integer"),
      *             @OA\Property(property="status", type="string", enum={"pending", "in-progress", "completed"}, example="pending")
      *         )
      *     ),
@@ -145,9 +146,9 @@ class TaskController extends BaseController
      *     )
      * )
      */
-    public function update(UpdateTaskRequest $request)
+    public function update($id, UpdateTaskRequest $request)
     {
-        $updatedTask = $this->taskService->update($request->validated());
+        $updatedTask = $this->taskService->update($id, $request->validated());
         return response()->json(['message' => 'Task updated successfully', 'task' => $updatedTask], 200);
     }
 
@@ -175,5 +176,30 @@ class TaskController extends BaseController
     {
         $this->taskService->destroy($task->id);
         return response()->json(['message' => 'Task deleted successfully'], 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/theTasks/important",
+     *     summary="Get important tasks",
+     *     tags={"Tasks"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of important tasks",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="tasks", type="array", @OA\Items(
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="title", type="string", example="Important Task Title"),
+     *                 @OA\Property(property="description", type="string", example="Important Task Description"),
+     *                 @OA\Property(property="priority", type="integer", example=1)
+     *             ))
+     *         )
+     *     )
+     * )
+     */
+    public function getImportantTasks()
+    {
+        $tasks = Task::where('priority', 3)->get();
+        return response()->json(["tasks" => $tasks], 200);
     }
 }

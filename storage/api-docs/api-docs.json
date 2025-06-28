@@ -1346,6 +1346,9 @@
                                         "type": "string",
                                         "format": "date"
                                     },
+                                    "priority": {
+                                        "type": "integer"
+                                    },
                                     "status": {
                                         "type": "string",
                                         "enum": [
@@ -1536,6 +1539,53 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Task deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/theTasks/important": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get important tasks",
+                "operationId": "a85287b0304baae41f8c13f0eb251441",
+                "responses": {
+                    "200": {
+                        "description": "List of important tasks",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "tasks": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "Important Task Title"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Important Task Description"
+                                                    },
+                                                    "priority": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"

@@ -127,6 +127,8 @@ class DayController extends BaseController
             $day = $this->dayService->findByDate($date);
         }
 
+        $day->load('routineTasks.routine');
+
         return $this->response($day);
     }
 

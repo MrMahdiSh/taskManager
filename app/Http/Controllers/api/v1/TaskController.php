@@ -172,9 +172,9 @@ class TaskController extends BaseController
      *     )
      * )
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        $this->taskService->destroy($task->id);
+        $this->taskService->destroy($id);
         return response()->json(['message' => 'Task deleted successfully'], 200);
     }
 

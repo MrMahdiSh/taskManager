@@ -93,13 +93,15 @@ class SessionController extends BaseController
         $validatedData = $request->validate([
             'type' => 'required|string|in:daily,weekly,monthly',
             'title' => 'required|string',
-            'content' => 'required|string',
-            'date' => 'required|date',
+            'content' => 'required|string'
         ]);
 
-        if ($validatedData["type"] == "daily" && !isset($validatedData["date"])) {
-            return $this->response([], "The date should comes.", 500);
-        }
+        if (!isset($validatedData["date"]))
+            $validatedData["date"] = now()->toDateString();
+
+        // if ($validatedData["type"] == "daily" && !isset($validatedData["date"])) {
+        //     return $this->response([], "The date should comes.", 500);
+        // }
 
         // find the day
         $day = Day::where("date", $validatedData["date"])->first();

@@ -1342,31 +1342,6 @@
             }
         },
         "/api/v1/time-lines/{id}": {
-            "get": {
-                "tags": [
-                    "TimeLines"
-                ],
-                "summary": "Get a specific timeline",
-                "operationId": "d71bb40ea47052d6115375026f753734",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A specific timeline"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            },
             "put": {
                 "tags": [
                     "TimeLines"

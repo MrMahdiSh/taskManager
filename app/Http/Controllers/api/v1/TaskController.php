@@ -199,7 +199,7 @@ class TaskController extends BaseController
      */
     public function getImportantTasks()
     {
-        $tasks = Task::where('priority', 3)->get();
+        $tasks = Task::where('priority', 3)->with('day')->get();
         return response()->json(["tasks" => $tasks], 200);
     }
 }

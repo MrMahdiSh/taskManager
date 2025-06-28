@@ -7,6 +7,7 @@ use App\Http\Controllers\DayController;
 use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\RoutineTaskController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TimeLineController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,4 +62,6 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('routineTasks', RoutineTaskController::class);
 
     Route::apiResource('sessions', SessionController::class);
+
+    Route::apiResource('time-lines', TimeLineController::class);
 });

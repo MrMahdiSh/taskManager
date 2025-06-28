@@ -1276,6 +1276,178 @@
                 }
             }
         },
+        "/api/v1/time-lines": {
+            "get": {
+                "tags": [
+                    "TimeLines"
+                ],
+                "summary": "Get all timelines",
+                "operationId": "225138dc8e781312a141f6dcd76460ce",
+                "responses": {
+                    "200": {
+                        "description": "List of timelines"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "TimeLines"
+                ],
+                "summary": "Create a new timeline",
+                "operationId": "abbdcfdc847a6f677a980037f10c3bdb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "start_date",
+                                    "end_date",
+                                    "goal",
+                                    "status"
+                                ],
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "goal": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "planned",
+                                            "done"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Timeline created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/v1/time-lines/{id}": {
+            "get": {
+                "tags": [
+                    "TimeLines"
+                ],
+                "summary": "Get a specific timeline",
+                "operationId": "d71bb40ea47052d6115375026f753734",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A specific timeline"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "TimeLines"
+                ],
+                "summary": "Update a timeline",
+                "operationId": "989427a342da3da016c4f0ca4b1f2506",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "goal": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "planned",
+                                            "done"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Timeline updated successfully"
+                    },
+                    "404": {
+                        "description": "Timeline not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "TimeLines"
+                ],
+                "summary": "Delete a timeline",
+                "operationId": "291f9380105066c078ae6db653588909",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Timeline deleted successfully"
+                    },
+                    "404": {
+                        "description": "Timeline not found"
+                    }
+                }
+            }
+        },
         "/api/v1/tasks": {
             "get": {
                 "tags": [
@@ -1621,6 +1793,10 @@
         {
             "name": "RoutineTasks",
             "description": "RoutineTasks"
+        },
+        {
+            "name": "TimeLines",
+            "description": "TimeLines"
         },
         {
             "name": "Tasks",

@@ -100,14 +100,23 @@ class SessionController extends BaseController
         if (!isset($validatedData["date"]))
             $validatedData["date"] = now()->toDateString();
 
-        // if ($validatedData["type"] == "daily" && !isset($validatedData["date"])) {
-        //     return $this->response([], "The date should comes.", 500);
-        // }
-
         // find the day
         $day = Day::where("date", $validatedData["date"])->first();
 
+        if (!$day) {
+            return response()->json(['error' => 'Day not found'], 404);
+        }
+
         $validatedData["day_id"] = $day->id;
+
+        // Check if the type is daily and if a session already exists for the day
+        if ($validatedData['type'] === 'daily') {
+            $existingSession = Session::where('day_id', $day->id)->where('type', 'daily')->first();
+            if ($existingSession) {
+                // Update the existing session
+                return $this->response($this->sessionService->update($existingSession->id, $validatedData));
+            }
+        }
 
         $validatedData["date"] = null;
 
@@ -174,7 +183,34 @@ class SessionController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        return $this->response($this->sessionService->update($id, $request->all()));
+        $session = Session::find($id);
+
+        if (!$session) {
+            return response()->json(['error' => 'Session not found'], 404);
+        }
+
+        $validatedData = $request->validate([
+            'type' => 'required|string|in:daily,weekly,monthly',
+            'title' => 'required|string',
+            'date' => 'nullable|string',
+            'content' => 'required|string'
+        ]);
+
+        if (!isset($validatedData["date"])) {
+            $validatedData["date"] = now()->toDateString();
+        }
+
+        // find the day
+        $day = Day::where("date", $validatedData["date"])->first();
+
+        if (!$day) {
+            return response()->json(['error' => 'Day not found'], 404);
+        }
+
+        $validatedData["day_id"] = $day->id;
+        $validatedData["date"] = null;
+
+        return $this->response($this->sessionService->update($validatedData, $id));
     }
 
     /**

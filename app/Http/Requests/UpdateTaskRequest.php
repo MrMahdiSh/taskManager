@@ -12,7 +12,7 @@ class UpdateTaskRequest extends FormRequest
             'id' => 'required|integer|exists:tasks,id',
             'title' => 'sometimes|string|max:255',
             'description' => 'nullable|string',
-            'status' => 'sometimes|in:pending,in-progress,completed',
+            'status' => 'sometimes|in:planned,done',
         ];
     }
 }

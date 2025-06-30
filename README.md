@@ -1,9 +1,9 @@
 ![Screenshot](screenShots/screenShot.jpg "Screenshot of the app")
 ![Screenshot](screenShots/screenShot2.jpg "Screenshot of the app")
 
-# Laravel API Project
+# Task Manager API Project
 
-This is an open-source Laravel-based API project that provides a robust foundation for building RESTful APIs. It includes integration with **Spatie JWT** for authentication and **Spatie Swagger** for API documentation.
+This is a Laravel-based API project designed to provide a robust foundation for building task management systems. It includes features such as **JWT Authentication** for secure access and **Swagger API Documentation** for easy API exploration.
 
 ## Features
 

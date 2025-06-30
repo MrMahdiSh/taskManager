@@ -1,3 +1,6 @@
+![Screenshot](screenShots/screenShot.jpg "Screenshot of the app")
+![Screenshot](screenShots/screenShot2.jpg "Screenshot of the app")
+
 # Laravel API Project
 
 This is an open-source Laravel-based API project that provides a robust foundation for building RESTful APIs. It includes integration with **Spatie JWT** for authentication and **Spatie Swagger** for API documentation.

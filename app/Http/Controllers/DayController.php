@@ -107,21 +107,7 @@ class DayController extends BaseController
 
         if (!$day) {
             // create the day
-            $createdDay = Day::create([
-                "date" => $date
-            ]);
-
-            // fetch routines
-            $routines = Routine::all();
-
-            // create routine tasks
-            foreach ($routines as $routine) {
-                RoutineTask::create([
-                    "day_id" => $createdDay->id,
-                    "routine_id" => $routine->id,
-                    "status" => "planned"
-                ]);
-            }
+            $this->dayService->createDay($date);
 
             // reload day with relationships
             $day = $this->dayService->findByDate($date);

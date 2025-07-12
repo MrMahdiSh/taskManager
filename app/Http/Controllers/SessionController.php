@@ -104,7 +104,8 @@ class SessionController extends BaseController
         $day = Day::where("date", $validatedData["date"])->first();
 
         if (!$day) {
-            return response()->json(['error' => 'Day not found'], 404);
+            $this->sessionService->createDay($validatedData["date"]);
+            $day = Day::where("date", $validatedData["date"])->first();
         }
 
         $validatedData["day_id"] = $day->id;
